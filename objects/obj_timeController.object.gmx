@@ -66,7 +66,7 @@ if (global.control){
     }
 }
 
-if (keyboard_check(vk_lshift)){
+if (keyboard_check(ord("C"))){
     if (global.recordedStep &gt; 0){
         global.isRecording = false;
         global.control = false;

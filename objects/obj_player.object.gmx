@@ -35,7 +35,7 @@ hsp = 0;
 vsp = 0;
 
 //Time Control Stuff
-pList = ds_grid_create(3500000, 20);
+pList[0] = 0;
 </string>
           </argument>
         </arguments>
@@ -117,17 +117,43 @@ y += vsp;
           <argument>
             <kind>1</kind>
             <string>///Rewind And Time
-if (global.isRecording){
-    pList[# global.recordedStep, 0] = x;
-    pList[# global.recordedStep, 1] = y;
+var step = global.recordedStep;
+var stepMod = step%4;
+if (global.isRecording &amp;&amp; stepMod == 0){
+    pList[step/4, 0] = x;
+    pList[step/4, 1] = y;
 }
 
 if (!global.control){
-    if (global.recordedStep &gt; 0){
-        x = pList[# global.recordedStep-1, 0];
-        y = pList[# global.recordedStep-1, 1];
+    if (step &gt; 8){
+        x = pList[(step/4)-1, 0];
+        y = pList[(step/4)-1, 1];
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text(10,10,"Step:"+string(global.recordedStep));
+draw_text(10,20,"ArraySize:"+string(array_length_1d(pList)));
 </string>
           </argument>
         </arguments>
