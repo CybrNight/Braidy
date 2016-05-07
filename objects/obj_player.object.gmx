@@ -118,16 +118,17 @@ y += vsp;
             <kind>1</kind>
             <string>///Rewind And Time
 var step = global.recordedStep;
-var stepMod = step%4;
+var stepSave
+var stepMod = step%stepSave;
 if (global.isRecording &amp;&amp; stepMod == 0){
-    pList[step/4, 0] = x;
-    pList[step/4, 1] = y;
+    pList[step/stepSave, 0] = x;
+    pList[step/stepSave, 1] = y;
 }
 
 if (!global.control){
     if (step &gt; 8){
-        x = pList[(step/4)-1, 0];
-        y = pList[(step/4)-1, 1];
+        x = pList[(step/stepSave)-1, 0];
+        y = pList[(step/stepSave)-1, 1];
     }
 }
 </string>
